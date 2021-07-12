@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "170112523349",
+    "firebase_url": "https://dynamicfire-ad003-default-rtdb.firebaseio.com",
+    "project_id": "dynamicfire-ad003",
+    "storage_bucket": "dynamicfire-ad003.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170112523349:android:5255eac7cfb3195d12c8dc",
+        "android_client_info": {
+          "package_name": "com.dynamicdevz.dynamicfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170112523349-66l68mludt9oohs5mrdc8hgba1h6josn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dynamicdevz.dynamicfirebase",
+            "certificate_hash": "13dfcbbf3abcc07bb4946ca300975ad6d5366012"
+          }
+        },
+        {
+          "client_id": "170112523349-sf3mnundljtjlco27eq9tuqb3t693f9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4sZSbKrASbopDZazIkzrEd_G_EBEgBus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170112523349-sf3mnundljtjlco27eq9tuqb3t693f9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
