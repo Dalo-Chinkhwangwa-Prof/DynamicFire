@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DynamicFirebase</string>
+    <string name="location_required">This application requires location to use. Please enable location or simply uninstall the app. Click button to open settings.</string>
 </resources>
