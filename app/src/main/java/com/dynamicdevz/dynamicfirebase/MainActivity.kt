@@ -17,6 +17,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,6 +26,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,11 +43,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var locationManager: LocationManager
 
+    private var imageUrl = ""
+
     private val locationListener = LocationListener {
         Log.d("TAG_X", "Current Location ${it.latitude}, ${it.longitude} ")
         viewModel.getLocationAddress(it)
     }
 
+    var location = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,8 +61,8 @@ class MainActivity : AppCompatActivity() {
             binding.locationTv.visibility = View.VISIBLE
             it.results[0]?.let { r ->
                 binding.locationTv.text = r.formatted_address
+                location = r.formatted_address
             }
-
         })
 
 
@@ -70,6 +77,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.uploadButton.setOnClickListener {
 
+
+            if(imageUrl.isEmpty()) {
+                Toast.makeText(this, "Please take a photo.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             val timeStamp = Date()
             val sdf = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 
@@ -78,9 +90,10 @@ class MainActivity : AppCompatActivity() {
             val firePost = FirePost(
                 sdf.format(timeStamp),
                 caption,
-                "1234566",
+                imageUrl,
                 "Kendy509",
-                123
+                0,
+                location
             )
 
             firebaseDatabase.reference.child("Posts")
@@ -120,7 +133,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -205,6 +217,37 @@ class MainActivity : AppCompatActivity() {
 
             val bitmap = it.extras?.get("data") as Bitmap
             binding.uploadImageview.setImageBitmap(bitmap)
+
+            val timeStamp = SimpleDateFormat("HHmmss_MMyyyy", Locale.US).format(Date())
+
+            val storageReference = FirebaseStorage.getInstance().reference.child("uploads/${timeStamp}")
+
+            val byteOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteOutputStream)
+
+            val uploadTask = storageReference.putBytes(byteOutputStream.toByteArray())
+            uploadTask.addOnCompleteListener{ task ->
+
+                if(task.isSuccessful){
+
+                    storageReference.downloadUrl.addOnCompleteListener { urlTask ->
+
+                        if(urlTask.isSuccessful){
+                            imageUrl = urlTask.result.toString()
+                            Log.d("TAG_X", imageUrl)
+                        } else {
+                            Log.d("TAG_X", "Failed to get the url : ${urlTask.exception?.localizedMessage}")
+                        }
+
+                    }
+
+
+                } else {
+                    Log.d("TAG_X", task.exception?.localizedMessage?:"Unknown..")
+                }
+
+
+            }
 
         }
 

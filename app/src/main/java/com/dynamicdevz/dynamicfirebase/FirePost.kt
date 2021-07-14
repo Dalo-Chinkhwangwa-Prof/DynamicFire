@@ -5,9 +5,9 @@ data class FirePost(
     var caption: String,
     var imageUrl: String,
     var userId: String,
-    var likes: Int
+    var likes: Int,
+    var location: String
 ){
-
-    constructor(): this("", "", "", "", 0)
+    constructor(): this("", "", "", "", 0, "")
 
 }
