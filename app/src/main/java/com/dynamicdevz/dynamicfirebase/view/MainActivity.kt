@@ -1,4 +1,4 @@
-package com.dynamicdevz.dynamicfirebase
+package com.dynamicdevz.dynamicfirebase.view
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.location.Geocoder
-import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
@@ -21,6 +19,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.dynamicdevz.dynamicfirebase.model.FirePost
+import com.dynamicdevz.dynamicfirebase.viewmodel.MainViewModel
 import com.dynamicdevz.dynamicfirebase.databinding.ActivityMainBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
-import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -101,9 +100,6 @@ class MainActivity : AppCompatActivity() {
 
             val key: String = firebaseDatabase.reference.child("Animals")
                 .push().key ?: ""
-
-            firebaseDatabase.reference.child("Animals").child(key)
-                .setValue(Animals(key, "Alien", "101"))
 
         }
 

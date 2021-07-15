@@ -1,4 +1,4 @@
-package com.dynamicdevz.dynamicfirebase
+package com.dynamicdevz.dynamicfirebase.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dynamicdevz.dynamicfirebase.databinding.PostItemLayoutBinding
+import com.dynamicdevz.dynamicfirebase.model.FirePost
 
 class FirePostAdapter : RecyclerView.Adapter<FirePostAdapter.FirePostViewHolder>() {
 

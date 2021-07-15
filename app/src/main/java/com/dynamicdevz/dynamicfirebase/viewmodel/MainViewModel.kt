@@ -1,4 +1,4 @@
-package com.dynamicdevz.dynamicfirebase
+package com.dynamicdevz.dynamicfirebase.viewmodel
 
 import android.location.Location
 import android.util.Log

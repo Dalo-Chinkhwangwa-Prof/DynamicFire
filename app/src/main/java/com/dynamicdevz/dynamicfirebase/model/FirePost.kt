@@ -1,4 +1,4 @@
-package com.dynamicdevz.dynamicfirebase
+package com.dynamicdevz.dynamicfirebase.model
 
 data class FirePost(
     var time: String,
