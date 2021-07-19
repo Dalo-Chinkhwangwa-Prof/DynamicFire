@@ -21,6 +21,16 @@
         </activity>
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.MainActivity" />
+        <provider
+            android:authorities="com.dynamicdevz.file_provider"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fire_image_provider"
+                />
+        </provider>
     </application>
 
 </manifest>

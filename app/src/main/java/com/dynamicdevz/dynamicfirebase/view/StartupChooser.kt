@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class StartupChooser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         FirebaseAuth.getInstance().currentUser?.let {
             //User is logged in
             if (it.isEmailVerified)

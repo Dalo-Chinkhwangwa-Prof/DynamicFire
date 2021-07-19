@@ -6,23 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <ImageView
+        android:id="@+id/menu_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:elevation="8dp"
+        android:src="@drawable/ic_menu"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:visibility="gone"
-        android:drawableStart="@drawable/ic_location"
         android:id="@+id/location_tv"
+        android:elevation="7dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#FF0000"
+        android:drawableStart="@drawable/ic_location"
+        android:padding="16dp"
+        tools:visibility="visible"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#FF0000"
-        android:padding="16dp"
-        tools:text="sdkjfskflj/safk"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textAlignment="center"
-        />
+        tools:text="sdkjfskflj/safk" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ui_blocker"
@@ -30,8 +42,8 @@
         android:layout_height="match_parent"
         android:background="#BFFF0000"
         android:clickable="true"
-        android:visibility="gone"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/error_iv"

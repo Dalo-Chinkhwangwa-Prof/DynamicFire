@@ -3,6 +3,7 @@ package com.dynamicdevz.dynamicfirebase.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.dynamicdevz.dynamicfirebase.R
 import com.dynamicdevz.dynamicfirebase.databinding.ActivityLoginActiivtyBinding
@@ -29,12 +30,15 @@ class LoginActivity : AppCompatActivity(), SignupFragment.SignupDelegate {
         binding.loginButton.setOnClickListener {
 
             val email = binding.emailEdittext.text.toString().trim()
-            val password = binding.emailEdittext.text.toString().trim()
+            val password = binding.passwordEdittext.text.toString().trim()
+
+            Log.d("TAG_X", "Password... '$password'")
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(
                 email,
                 password
             ).addOnCompleteListener {
+                Log.d("TAG_X", "Completed")
                 if (it.isSuccessful) {
                     if (FirebaseAuth.getInstance().currentUser?.isEmailVerified == true) {
                         startActivity(Intent(this, MainActivity::class.java).also {
@@ -50,7 +54,11 @@ class LoginActivity : AppCompatActivity(), SignupFragment.SignupDelegate {
                         ).show()
                     }
                 } else {
-                    Toast.makeText(this, "Failed to login: ${it.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Failed to login: ${it.exception?.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -64,18 +72,18 @@ class LoginActivity : AppCompatActivity(), SignupFragment.SignupDelegate {
                 newUser.password
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    if (FirebaseAuth.getInstance().currentUser?.isEmailVerified == true) {
-                        FirebaseAuth.getInstance().currentUser?.sendEmailVerification()
-                        Toast.makeText(
-                            this,
-                            "Please verify your email address.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(this, "Error : ${it.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
-                    }
+                    FirebaseAuth.getInstance().currentUser?.sendEmailVerification()
+                    Toast.makeText(
+                        this,
+                        "Please verify your email address.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
+                } else {
+                    Toast.makeText(this, "Error : oops: ${it.exception}", Toast.LENGTH_SHORT).show()
+                    Log.d("TAG_X", "${it.exception}")
                 }
+
             }
     }
 }
